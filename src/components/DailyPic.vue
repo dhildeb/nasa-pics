@@ -30,7 +30,6 @@ export default {
     const state = reactive({
       dailyPic: computed(() => AppState.dailyPic)
     })
-
     return {
       state
     }
@@ -40,6 +39,6 @@ export default {
 
 <style scoped>
 img{
-  height: 75vh
+  height: 75vh;
 }
 </style>

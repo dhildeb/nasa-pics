@@ -1,4 +1,10 @@
 <template>
+  <form @submit="searchDailyPic(state.query)">
+    <input type="text" v-model="state.query" placeholder="yyyy-mm-dd">
+    <button type="submit">
+      search
+    </button>
+  </form>
   <div>
     <DailyPic />
   </div>
@@ -6,14 +12,23 @@
 
 <script>
 import { nasasApiService } from '../services/NasasApiService'
-import { onMounted } from 'vue'
+import { onMounted, reactive } from 'vue'
+import { AppState } from '../AppState'
 
 export default {
   setup() {
+    const state = reactive({
+      query: ''
+    })
     onMounted(() => {
       nasasApiService.getDailyPic()
     })
     return {
+      state,
+      searchDailyPic(query) {
+        AppState.dailyPic = null
+        nasasApiService.searchDailyPic(query)
+      }
     }
   }
 }
